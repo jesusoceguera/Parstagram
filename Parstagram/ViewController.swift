@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,20 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    func createTestUser() {
+        let user = PFUser()
+        user.username = "Test"
+        user.password = "password"
+        user["school"] = "CSN"
+        user["major"] = "computer science"
+        
+        user.signUpInBackground { (success, error) in
+            if success {
+                print("Successfully created test user")
+            } else {
+                print("Error: \(error?.localizedDescription ?? "some error happened")")
+            }
+        }
+    }
 }
 
